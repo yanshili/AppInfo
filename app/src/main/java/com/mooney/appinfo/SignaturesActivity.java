@@ -201,7 +201,7 @@ public class SignaturesActivity extends Activity implements View.OnClickListener
             // 证书机器码
             as_serialnumber_tv.setText(cert.getSerialNumber().toString());
             // 证书 DER编码
-            as_dercode_tv.setText(SignaturesMsg.toHexString(cert.getTBSCertificate()));
+            as_dercode_tv.setText(pInfo.signatures[0].toCharsString());
 
 
             // 获取证书发行者   可根据证书发行者来判断该应用是否被二次打包（被破解的应用重新打包后，签名与原包一定不同，据此可以判断出该应用是否被人做过改动）
