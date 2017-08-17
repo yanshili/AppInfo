@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context="me.mooney.host.HostMainActivity">
+
+    <ListView
+        android:id="@+id/plugin_list"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onMainClick"
+                android:text="主程序——主页"
+                android:textSize="30sp"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onPluginClick"
+                android:text="主程序——跳转到插件页面"
+                android:textSize="30sp"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onMessageClick"
+                android:text="主程序——查看保存的信息"
+                android:textSize="30sp"
+                android:padding="10dp"
+                android:layout_margin="10dp"
+                />
+
+            <TextView
+                android:id="@+id/tv_plugin_infos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onPluginInfoClick"
+                android:text="主程序——查看plugin信息"
+                android:textSize="20sp"
+                android:padding="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                />
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

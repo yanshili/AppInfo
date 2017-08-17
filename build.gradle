@@ -1,23 +1,31 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     repositories {
-        jcenter()
+//        jcenter()
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath 'com.android.tools.build:gradle:2.1.3'
+        classpath 'com.didi.virtualapk:gradle:0.9.0'
     }
 }
 
 allprojects {
     repositories {
-        jcenter()
+//        jcenter()
+        maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+ext{
+
+    compileSdk = 24
+    minSdk = 18
+    targetSdk = 24
+    buildTools = "25.0.0"
+
+    support = "24.2.1"
+
 }
