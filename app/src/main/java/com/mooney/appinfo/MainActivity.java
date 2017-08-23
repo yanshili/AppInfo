@@ -45,7 +45,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mContext = MainActivity.this;
-        // 初始化操作
+        // 初始化操作0
         initViews();
         initValues();
         initListeners();
