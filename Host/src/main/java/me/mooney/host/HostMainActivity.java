@@ -42,8 +42,9 @@ public class HostMainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_host_main);
 
-        ActivityCompat.shouldShowRequestPermissionRationale(this
-                , Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        ActivityCompat.requestPermissions(this
+                , new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}
+                , 12);
 
         saveMessage("this message is saved in host!!!");
 
@@ -76,11 +77,13 @@ public class HostMainActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 File file=mAdapter.getItem(position);
+                Log.i("HostMainActivity","插件路径:"+file.getPath());
                 if (file.exists()) {
                     try {
                         pluginManager.loadPlugin(file);
                     } catch (Exception e) {
                         e.printStackTrace();
+                        Log.i("HostMainActivity","插件加载失败");
                     }
                 }
             }
@@ -168,7 +171,7 @@ public class HostMainActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==1&&resultCode==RESULT_OK){
+        if (requestCode==12&&resultCode==RESULT_OK){
             Uri uri = data.getData();//得到uri，后面就是将uri转化成file的过程。
 
 

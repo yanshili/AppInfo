@@ -1,7 +1,9 @@
 package me.mooney.plugin;
 
+import android.Manifest;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.view.View;
 
 import com.didi.virtualapk.PluginManager;
@@ -25,6 +27,10 @@ public class PluginMainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plugin_main);
+
+        ActivityCompat.requestPermissions(this
+                , new String[]{Manifest.permission.ACCESS_FINE_LOCATION}
+                , 12);
     }
 
     public void onMainClick(View view){

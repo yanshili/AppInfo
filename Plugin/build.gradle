@@ -62,9 +62,10 @@ dependencies {
 
 }
 
+def hostPath="${getProject().getRootDir().path}\\Host"
 // 插件配置信息,放在文件最下面
 virtualApk {
-    packageId = 0x8f             // 插件资源id，避免资源id冲突
-    targetHost='Host'      // 宿主工程的路径
+    packageId = 0x2f             // 插件资源id，避免资源id冲突
+    targetHost=hostPath      // 宿主工程的路径
     applyHostMapping = true      // 插件编译时是否启用应用宿主的apply mapping
 }
