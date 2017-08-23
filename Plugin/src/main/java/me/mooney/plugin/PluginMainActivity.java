@@ -27,14 +27,18 @@ public class PluginMainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plugin_main);
+//
+//        ActivityCompat.requestPermissions(this
+//                , new String[]{Manifest.permission.ACCESS_FINE_LOCATION}
+//                , 12);
+    }
+
+    public void onMainClick(View view){
+//        toast("点击插件主按钮00");
 
         ActivityCompat.requestPermissions(this
                 , new String[]{Manifest.permission.ACCESS_FINE_LOCATION}
                 , 12);
-    }
-
-    public void onMainClick(View view){
-        toast("点击插件主按钮00");
     }
 
 

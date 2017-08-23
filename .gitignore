@@ -7,3 +7,5 @@
 /captures
 /gradle
 .externalNativeBuild
+/Host/Host_R.txt
+/Host/versions.txt

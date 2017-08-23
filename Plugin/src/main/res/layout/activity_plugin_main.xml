@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onMainClick"
-        android:text="插件——主页1"
+        android:text="插件——主页1\n点击申请权限"
         android:textSize="30sp"
         android:padding="10dp"
         />

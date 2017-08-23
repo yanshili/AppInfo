@@ -1,1 +1,1 @@
-include ':app', ':Host', ':Plugin', ':Lib'
+include ':app', ':Host', ':Plugin', ':Lib', ':LibPlugin_AndroidStub', ':LibPlugin_CoreLibrary'

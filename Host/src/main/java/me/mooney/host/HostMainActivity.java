@@ -4,11 +4,13 @@ import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -88,6 +90,16 @@ public class HostMainActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode==12){
+            if (grantResults[0]== PackageManager.PERMISSION_GRANTED){
+                loadFile();
+            }
+        }
     }
 
     private void loadFile() {
@@ -171,7 +183,7 @@ public class HostMainActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==12&&resultCode==RESULT_OK){
+        if (requestCode==1&&resultCode==RESULT_OK){
             Uri uri = data.getData();//得到uri，后面就是将uri转化成file的过程。
 
 
