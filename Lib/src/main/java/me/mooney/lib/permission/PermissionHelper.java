@@ -1,9 +1,14 @@
 package me.mooney.lib.permission;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.TextUtils;
+
+import com.didi.virtualapk.PluginManager;
 
 
 public class PermissionHelper {
@@ -16,8 +21,9 @@ public class PermissionHelper {
         PermissionEngine.mListener=listener;
 
         Intent intent=new Intent();
-        intent.setComponent(new ComponentName("me.mooney.host"
-                ,"me.mooney.lib.permission.PermissionActivity"));
+        intent.setComponent(new ComponentName(
+                PluginManager.getInstance(context).getHostContext().getPackageName()
+                ,PermissionActivity.class.getName()));
 
         intent.putExtra("permission_description",permissionDescription);
         intent.putExtra("permissions",permissions);
@@ -152,17 +158,46 @@ class PermissionEngine{
                     sListener.onGranted();
             }else{
                 //权限没有全部授予，再次请求权限
-                PermissionUtils.showMissingPermissionDialog(sActivity,mPermissionDes);
+                showMissingPermissionDialog(sActivity,mPermissionDes);
             }
         }
+    }
+
+    /**
+     * 显示权限对话框
+     *
+     * @param activity
+     * @param permissionDes
+     */
+    public static void showMissingPermissionDialog(final Activity activity, String permissionDes) {
+        String message = String.format("APP需要%1$s的权限为您提供服务,是否去设置", TextUtils.isEmpty(permissionDes) ? "必要" : permissionDes);
+        new AlertDialog.Builder(activity)
+                .setTitle("提示")
+                .setMessage(message)
+                .setPositiveButton("设置", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        PermissionUtils.startAppSettings(activity);
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        sListener.onDenied();
+                    }
+                })
+                .setCancelable(false)
+                .show();
     }
 
 
     private static OnPermissionListener sListener;
 
-    public abstract static class OnPermissionListener {
+    public interface OnPermissionListener {
 
-        public abstract void onGranted();
+        void onGranted();
 
+        void onDenied();
     }
 }

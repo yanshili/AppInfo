@@ -50,6 +50,11 @@ public class HostMainActivity extends BaseActivity {
                         loadFile();
                         Log.e("HostMainActivity","HostMainActivity---- 授权成功");
                     }
+
+                    @Override
+                    public void onDenied() {
+                        Log.e("HostMainActivity","HostMainActivity---- 取消授权");
+                    }
                 }
                 , "---定位权限----"
                 , Manifest.permission.WRITE_EXTERNAL_STORAGE

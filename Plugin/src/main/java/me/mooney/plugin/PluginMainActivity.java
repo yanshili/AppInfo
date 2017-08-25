@@ -39,6 +39,11 @@ public class PluginMainActivity extends BaseActivity {
                     public void onGranted() {
                         Log.e("HostMainActivity","PluginMainActivity===== 授权成功");
                     }
+
+                    @Override
+                    public void onDenied() {
+                        Log.e("HostMainActivity","PluginMainActivity===== 取消授权");
+                    }
                 }
                 , "---定位权限----"
                 , Manifest.permission.WAKE_LOCK

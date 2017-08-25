@@ -140,7 +140,7 @@ class PermissionUtils {
      *
      * @param activity
      */
-    private static void startAppSettings(Activity activity) {
+    public static void startAppSettings(Activity activity) {
         Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         intent.setData(Uri.parse("package:" + activity.getPackageName()));
         if (intent.resolveActivity(activity.getPackageManager()) != null) {

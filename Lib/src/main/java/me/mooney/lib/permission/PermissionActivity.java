@@ -20,6 +20,12 @@ public class PermissionActivity extends Activity {
             granted=true;
             finish();
         }
+
+        @Override
+        public void onDenied() {
+            granted=false;
+            finish();
+        }
     };
 
     private PermissionActivity.OnPermissionListener mTempListener;
@@ -47,13 +53,20 @@ public class PermissionActivity extends Activity {
 
     public interface OnPermissionListener{
         void onGranted();
+
+        void onDenied();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mTempListener!=null&&granted){
-            mTempListener.onGranted();
+        if (mTempListener!=null){
+            if (granted){
+                mTempListener.onGranted();
+            }else {
+                mTempListener.onDenied();
+            }
+
         }
     }
 }
