@@ -4,14 +4,11 @@ import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +29,8 @@ import java.util.List;
 import me.mooney.lib.base.BaseActivity;
 import me.mooney.lib.listview.BASEAdapter;
 import me.mooney.lib.listview.ViewHolder;
+import me.mooney.lib.permission.PermissionActivity;
+import me.mooney.lib.permission.PermissionHelper;
 
 public class HostMainActivity extends BaseActivity {
 
@@ -44,9 +43,17 @@ public class HostMainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_host_main);
 
-        ActivityCompat.requestPermissions(this
-                , new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}
-                , 12);
+        PermissionHelper.checkPermissions(this
+                , new PermissionActivity.OnPermissionListener() {
+                    @Override
+                    public void onGranted() {
+                        loadFile();
+                        Log.e("HostMainActivity","HostMainActivity---- 授权成功");
+                    }
+                }
+                , "---定位权限----"
+                , Manifest.permission.WRITE_EXTERNAL_STORAGE
+                );
 
         saveMessage("this message is saved in host!!!");
 
@@ -73,7 +80,7 @@ public class HostMainActivity extends BaseActivity {
         };
 
         mListView.setAdapter(mAdapter);
-        loadFile();
+
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -92,15 +99,6 @@ public class HostMainActivity extends BaseActivity {
         });
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode==12){
-            if (grantResults[0]== PackageManager.PERMISSION_GRANTED){
-                loadFile();
-            }
-        }
-    }
 
     private void loadFile() {
         File file=new File(Environment.getExternalStorageDirectory()+"/plugin");

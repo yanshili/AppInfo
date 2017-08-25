@@ -3,7 +3,7 @@ package me.mooney.plugin;
 import android.Manifest;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.View;
 
 import com.didi.virtualapk.PluginManager;
@@ -12,6 +12,8 @@ import com.didi.virtualapk.internal.LoadedPlugin;
 import java.io.File;
 
 import me.mooney.lib.base.BaseActivity;
+import me.mooney.lib.permission.PermissionActivity;
+import me.mooney.lib.permission.PermissionHelper;
 
 /**
  * 作者： mooney
@@ -27,18 +29,21 @@ public class PluginMainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plugin_main);
-//
-//        ActivityCompat.requestPermissions(this
-//                , new String[]{Manifest.permission.ACCESS_FINE_LOCATION}
-//                , 12);
     }
 
     public void onMainClick(View view){
 //        toast("点击插件主按钮00");
-
-        ActivityCompat.requestPermissions(this
-                , new String[]{Manifest.permission.ACCESS_FINE_LOCATION}
-                , 12);
+        PermissionHelper.checkPermissions(this
+                , new PermissionActivity.OnPermissionListener() {
+                    @Override
+                    public void onGranted() {
+                        Log.e("HostMainActivity","PluginMainActivity===== 授权成功");
+                    }
+                }
+                , "---定位权限----"
+                , Manifest.permission.WAKE_LOCK
+                , Manifest.permission.READ_PHONE_STATE
+                , Manifest.permission.ACCESS_FINE_LOCATION);
     }
 
 
