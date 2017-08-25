@@ -2,7 +2,6 @@ package me.mooney.lib.permission;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,10 +20,9 @@ public class PermissionHelper {
         PermissionEngine.mListener=listener;
 
         Intent intent=new Intent();
-        intent.setComponent(new ComponentName(
-                PluginManager.getInstance(context).getHostContext().getPackageName()
-                ,PermissionActivity.class.getName()));
-
+        context= PluginManager.getInstance(context).getHostContext();
+        intent.setClassName(context.getPackageName()
+                ,PermissionActivity.class.getName());
         intent.putExtra("permission_description",permissionDescription);
         intent.putExtra("permissions",permissions);
         context.startActivity(intent);
