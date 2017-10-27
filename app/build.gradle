@@ -11,6 +11,53 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+
+        release_key {
+
+            File keyFile=new File("${getProject().getRootDir().path}"+java.io.File.separator+"AppInfo.jks")
+            keyAlias "appinfo"
+            keyPassword "468035416"
+            storeFile keyFile
+            storePassword "468035416"
+        }
+
+    }
+
+
+    buildTypes {
+
+        //这里的名字自定义，不要求大小写
+        release {
+
+            // 这里是在 applicationId 中添加了一个后缀。所以『.』要加上
+//            applicationIdSuffix ".release"
+
+            // 这里的作用是选择是否混淆代码
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            signingConfig signingConfigs.release_key
+
+        }
+
+
+
+        debug {
+//            applicationIdSuffix ".debug"
+//            minifyEnabled true
+//            zipAlignEnabled true
+//            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            signingConfig signingConfigs.release_key
+
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
